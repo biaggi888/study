@@ -22,25 +22,25 @@ public class SaxDemo1
     SAXParser parser = null;
     try {
       parser = SAXParserFactory.newInstance().newSAXParser();
-    } catch (ParserConfigurationException e) {
-      e.printStackTrace();
-    } catch (SAXException e) {
+    } catch (ParserConfigurationException | SAXException e) {
       e.printStackTrace();
     }
     XMLReader reader = null;
     try {
-      reader = parser.getXMLReader();
+      if (parser != null) {
+        reader = parser.getXMLReader();
+      }
     } catch (SAXException e) {
       e.printStackTrace();
     }
 
-    reader.setContentHandler(new MyContentHandler());
-    try {
-      reader.parse("resources/books.xml");
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (SAXException e) {
-      e.printStackTrace();
+    if (reader != null) {
+      reader.setContentHandler(new MyContentHandler());
+      try {
+        reader.parse("resources/books.xml");
+      } catch (IOException | SAXException e) {
+        e.printStackTrace();
+      }
     }
   }
 }
@@ -52,21 +52,25 @@ class MyContentHandler implements ContentHandler
   public void startDocument() throws SAXException {
     System.out.println("1.StartDocument");
   }
+
   @Override
   public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
-    System.out.println("2"+uri + " , " + localName +","+qName);
+    System.out.println("2" + uri + " , " + localName + "," + qName);
 
   }
+
   @Override
   public void characters(char[] ch, int start, int length) throws SAXException {
-    System.out.println("3"+new String(ch,start,length));
+    System.out.println("3" + new String(ch, start, length));
 
   }
+
   @Override
   public void endElement(String uri, String localName, String qName) throws SAXException {
-    System.out.println("4."+uri + " , " + localName +","+qName);
+    System.out.println("4." + uri + " , " + localName + "," + qName);
 
   }
+
   @Override
   public void endDocument() throws SAXException {
     System.out.println("5. End document");
@@ -74,14 +78,10 @@ class MyContentHandler implements ContentHandler
   }
 
 
-
-
-
   @Override
   public void setDocumentLocator(Locator locator) {
 
   }
-
 
 
   @Override
@@ -93,8 +93,6 @@ class MyContentHandler implements ContentHandler
   public void endPrefixMapping(String prefix) throws SAXException {
 
   }
-
-
 
 
   @Override
