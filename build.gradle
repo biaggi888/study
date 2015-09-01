@@ -11,19 +11,20 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-
 apply plugin: 'war'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-  // Use 'jcenter' for resolving your dependencies.
-  // You can declare any Maven/Ivy/file repository here.
+  mavenCentral()
   jcenter()
 }
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
   // The production code uses the SLF4J logging API at compile time
+  providedCompile 'javax.servlet:javax.servlet-api:3.+',
+      'javax.servlet:jstl:1.+',
+      'javax.servlet:jsp-api:2.+'
   compile 'org.slf4j:slf4j-api:1.+'
 
   // Declare the dependency for your favourite test framework you want to use in your tests.
