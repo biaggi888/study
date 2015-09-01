@@ -5,6 +5,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
 
@@ -45,6 +46,9 @@ public class SaxDemo1
   }
 }
 
+class MyContentHandler2 extends DefaultHandler {
+
+}
 
 class MyContentHandler implements ContentHandler
 {
